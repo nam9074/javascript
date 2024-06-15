@@ -165,16 +165,69 @@ if (!(a > 0)) {
 
 // toán tử chuỗi (String operato)
 
-var firstName = 'Truong';
-var lastName = 'Nam';
+    var firstName = 'Truong';
+    var lastName = 'Nam';
 
-console.log(firstName + lastName); // TruongNam
-console.log(firstName + ' ' + lastName); // Truong Nam
+    console.log(firstName + lastName); // TruongNam
+    console.log(firstName + ' ' + lastName); // Truong Nam
 
-var ten = 'Truong'; //ko được sữa học thêm ở dòng này =>
-ten += ' Nam';      // thêm biến gán vào
+    var ten = 'Truong'; //ko được sữa học thêm ở dòng này =>
+    ten += ' Nam';      // thêm biến gán vào
 
-console.log(ten);
+    console.log(ten);
+        /* 
+            Chuỗi String trong Javascript
+            1. Tạo chuỗi
+                - Các cách tạo chuối
+                - Nên dùng cách nào, lý do
+                - kiểm tra data type
+            2. Một số case sử dụng backslash (\)
+            3. Xem độ dài chuỗi
+            4. Chú ý độ dài khi viết code
+            5. Template string ES6
+        */
+
+            var fullName = 'Truong Nam \'đang học code\' '; // (\) chèn thêm kí tự vào
+            console.log(fullName);
+            // xem độ dài chuỗi 
+            console.log(fullName.length);
+            // cách xuống dòng nếu code quá dài
+            var fullName = "Một số case sử dụng backslash"
+            + "1Một số case sử dụng backslash"
+            + "2Một số case sử dụng backslash";
+            console.log(fullName);
+            // Template string ES6
+            var firstName = 'Truong';
+            var lastName = 'Nam';
+            console.log(`Toi la: ${firstName} ${lastName}`) 
+
+            var myString = 'Truong Nam đang học code';
+            // Làm việc với chuỗi          Từ khóa tìm kiếu nhiều chuỗi hớn (Keyword: Javascript string methods)
+            // 1. length                                Đo độ dài chuỗi 
+            console.log(myString.length),
+            // 2. find index                            Tìm vị trí của ký tự nằm trong 1 chuỗi
+            console.log(myString.indexOf('đang'))
+            // 3. cut String                            Cắt chuỗi
+            console.log(myString.slice(12, 16))
+            // 4. Replace                               Ghi đè
+            console.log(myString.replace('đang', 'tập'))
+            // 5. Convert to upper case                 Chuyển đổi tất cả chuổi thành chữ hoa
+            console.log(myString.toUpperCase());
+            // 6. convert to lower case                 Chuyển đổi tất cả chuổi thành chữ thường
+            console.log(myString.toLowerCase());
+            // 7. Trim                                  loại bỏ kí tự khoảng trắng 2 đầu
+            console.log(myString.trim())
+            // 8. Split                                 dữ 1 điểm chung cắt arayy thành chuỗi 
+            var language = ' Javascrip, PHP, Ruby'
+            console.log(language.split(', '))
+            // 9. Get a character by index              lấy 1 kí tự cho trước
+            const myString2 = 'Truong Nam';
+            console.log(myString2.charAt(0))
+            // hoặc có thể 
+            console.log(myString2[2]);     
+            
+
+
 
 // kiểu dữ liệu Boolean 
 var isSuccess = true;
@@ -242,8 +295,92 @@ Kiểu dữ liệu trong javascrip
                                                             'Ruby'
                                                         ];
 */
+/* 
+    Hàm (function) trong Javascript
+        1. Hàm?
+            - một khối mã
+            - làm 1 việc cụ thể
+        
+        2. Loại hàm
+            - Built-in
+            - Tự định nghĩa
+
+        3. Tính chất
+            - Không thực thi khi được định nghĩa
+            - Sẽ thực thi khi được gọi
+            - Có thể nhận hàm
+            - Có thể trả về 1 giá trị
+
+        4. Tạo hàm đầu tiên
+*/
+
+        function showDialog() {
+            // code 
+            alert('Hi. xin chào!');
+        }
+        // gọi hảm
+        showDialog();
+
+    /*
+    Các loại function
+        1. Declaration function
+        2. Expression function
+        3. Arrow function
+    */
+        function showMassage() { //định nghĩa rồi đặt tê là Declaration
+
+        }
+
+        var showMassage2 = function() { //được gán cho 1 biến
+
+        }
 
 
+/* Tham số trong hàm 
+    1. Tham số?
+        - định nghĩa?
+        - kiểu dữ liệu?
+        - tính private?     // riêng tư
+        - 1 tham số
+        - nhiều tham số
+
+    2. Truyền tham số
+        - 1 tham số
+        - nhiều tham số
+
+    3. Arguments?
+        - đối tượng Arguments
+        - giới thiệu vong for ôf
+*/
+        function writelog(massage, massage2) {
+        if (massage) {
+            console.log(massage);   // tham số 
+            }
+        if (massage2) {
+            console.log(massage2);
+        }
+        }
+
+
+        writelog('Log 1', 'Log 2');   // đối số
+
+        //Arguments 
+        function writelog() {
+            var myString = '';  
+            for (var param of arguments) {  
+                myString += `${param} -`
+            } // chạy lặp lại số lần theo phần tử được gán 3 lần
+            console.log(myString) //hàm myString tạo in ra 1 dòng
+        }
+        writelog('Log 1', 'Log 2', 'log 3');
+// return trong hàm 
+        function cong(a, b) {
+            return a + b;
+        }
+         
+        var result = cong (2, 8);
+        console.log(result)
+    
 
 
 
