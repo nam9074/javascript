@@ -232,3 +232,177 @@ Khi value có kiểu số, hàm sẽ trả về true, ngược lại trả về 
         console.log(author.getName());
         console.log(user.getName());
 
+    /* Object prototype - Basic
+        1. Prototype là gì?         thêm 1 thuộc tính ở bên ngoài hàm tạo 
+        2. sử dụng khi nào?
+    */
+
+    function User(fistName, lastName, avatar) {
+        this.fistName = fistName;
+        this.lastName = lastName;
+        this.avatar = avatar;
+        this.getName = function() {
+            return `${this.fistName} ${this.lastName}`
+        }
+    }
+    User.prototype.className = 'B8';
+    User.prototype.getClassName = function() {
+        return this.className;
+    }
+
+    var user = new User('Truong', 'Nam', 'Avatar 1');
+    var user2 = new User('Hoai', 'Nam', 'Avatar 2');
+
+    console.log(user.className);
+    console.log(user2.getClassName());
+
+// Đối tượng Data
+var date = new Date();
+
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+
+console.log(`${day}/${month}/${year}`);
+
+/* Đối tượng Manth
+    Manth # Oject
+
+    - Math.PI           PI
+    - Math.round();     Làm trong số
+    - Math.abs();       Giá trị tuyệt đối
+    - Math.celi();      Làm tròn trên
+    - Math.floor();     Làm tròn dưới
+    - Math.random();    Số thập phân ngẩu nhiên
+    - Math.min();       Trả về số nhỏ nhất
+    - Math.max();       Trả về số lớn nhất
+*/
+
+var random = Math.floor(Math.random() * 100);
+
+if (random < 5) {
+    console.log('Cường Hóa thành công')     // tỉ lệ ra đồ 5%
+}
+console.log(Math.max(-100, 20, 40, 90, 10)); // tương tự min
+
+    // Hãy tạo hàm getRandomItem, hàm này nhận 1 tham số là mảng và sẽ trả về ngẫu nhiên 1 phần tử của mảng.
+
+    function getRandomItem(arr = []) {      // phải trả về array
+        var item = Math.floor(Math.random() * arr.length);
+        return arr[item];
+    }
+    getRandomItem(['javascript', 'ruby', 'PHP']);
+
+// Câu lệch rẻ nhánh if else
+
+var date = 3;
+
+if (date === 2) {
+    console.log('Hôm nay là thứ 2');
+} else if (date === 3) {
+    console.log('Hôm nay là ngày thứ 3')
+} else if(date === 4) {
+    console.log('Hôm nay là ngày thứ 44')
+} else (
+    console.log('Không biết')
+)
+    /*
+    Khi a chia hết cho 3 thì return về 1
+    Khi a chia hết cho 5 thì return về 2
+    Khi a chia hết cho 15 thì return về 
+    */
+    function run(a) {
+        if(a % 3 == 0 && a % 15 !== 0) {
+            return 1;
+        } else if(a % 5 == 0 && a % 15 !==0){
+            return 2;
+        } else if(a% 15 ==0){
+            return 3;
+        }
+    
+        
+    }
+    // Kỳ vọng
+    console.log(run(3)) // 1
+    console.log(run(5)) // 2
+    console.log(run(15)) // 3
+
+
+// Lệnh rẽ nhánh Switch
+var date = 2;
+switch(date) {
+    case 2:
+        console.log("Hôm nay là thứ 2");
+        break;
+    case 3:
+        console.log("Hôm nay là thứ 3");
+        break;
+    default:
+        console.log("Hôm nay là thứ 4");
+        break;
+}
+
+// Toán tử 3 ngôi - ternary operator
+var course = {
+    name: 'Javascript',
+    coin: 0
+}
+var result = course.coin > 0 ? `${course.coin} Coins ` : 'Miễn phí';
+console.log(result); 
+
+var a = 1;
+var b = 2;
+
+var c = a < 0 ? a : b;
+    /*getCanVoteMessage, hàm này có 1 tham số là age. 
+    Trong trường hợp từ 18 tuổi trở lên hàm sẽ trả về Bạn có thể bỏ phiếu, 
+    ngược lại hàm trả về Bạn chưa được bỏ phiếu.
+    */
+    // Làm bài
+        function getCanVoteMessage(age) {
+            return age >= 18 ? 'Bạn có thể bỏ phiếu' : 'Bạn chưa được bỏ phiếu';
+        }
+        // Kỳ vọng
+        console.log(getCanVoteMessage(18)) // 'Bạn có thể bỏ phiếu'
+        console.log(getCanVoteMessage(15)) // 'Bạn chưa được bỏ phiếu'
+
+/* 
+        Vòng lặp - Loop 
+    
+    1. for          - Lặp với điều kiện đúng
+    2. for/in       - Lặp qua Key của đôi tượng
+    3. for/of       - Lặp qua Value của đối tượng
+    4. while        - Lặp khi điều kiện đúng
+    5. do/while     - Lặp ít nhất 1 lần, sau đó lặp khi điều kiện đúng
+*/
+
+        for (var i = 1; i <= 10; i++) {
+            // console.log(i);
+            //code
+        }
+        /* Hãy tạo hàm getRandNumbers có 3 tham số là min, max, length. Hàm này sẽ trả về một mảng gồm length phần tử, các giá trị trong mảng là số ngẫu nhiên, giá trị trong khoảng từ min tới max.
+
+        Gợi ý: Math.random() * (max - min) + min là cách tạo ra 1 số ngẫu nhiên trong khoảng min - max.
+        */
+            // Làm bài
+            function getRandNumbers (min, max, length) {
+                var arr = [] ;
+                for ( var i = 0; i < length; i++) {
+                arr.push(Math.random() * (max - min) + min)
+                }
+                return arr; 
+            }
+            /**
+             * Hết sức lưu ý: Hãy suy nghĩ kỹ để đảm bảo vòng lặp (loop)
+             * luôn có điểm dừng, trình duyệt của bạn sẽ bị treo
+             * nếu vòng lặp không có điểm dừng.
+             * 
+             * VD 1: for (var i = 0; i < 100; i--) // i++ mới đúng
+             * VD 2: for (var i = 100; i >= 0; i++) // i-- mới đúng
+             * là 2 vòng lặp không có điểm dừng (lặp vô hạn)
+             * 
+             * => Treo trình duyệt!!!
+             */
+
+
+            
