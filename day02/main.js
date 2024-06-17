@@ -187,3 +187,48 @@ Khi value có kiểu số, hàm sẽ trả về true, ngược lại trả về 
 
             console.log(result); // Expected: "Monkey"
             console.log(animals); // Expected: ['Monkey', 'Tiger', 'Elephant']
+
+// Object trong javascript
+
+    var emailKey = 'email';
+
+    var myInfo = {
+        name : 'Truong Nam',
+        age : 20,
+        address: 'Quang Binh, VN',
+        [emailKey]: 'truongnam@gmail.com',          //Thêm key vào
+        getName: function() {
+            return this.name;                       // this cũng có nghĩa là myInfo
+        }
+        //Function --> phương thức / method         name: function() {
+        //                                          }
+        // Other   --> Thuộc tính  / propety        name: 'truong nam',
+    }
+    console.log(myInfo.getName());
+
+    myInfo.email = 'truongnam@gmail.com',           //thêm key vào cách 1
+    myInfo['my-email'] = 'truongnam@gmail.com';     //thêm key vào  cách 2
+    
+    console.log(myInfo.address);                       // lấy key ra cách 1
+    console.log(myInfo['address']);                     // lấy key ra cách 2 về dạng string
+
+    // Object constructor   : xây dụng đối tượng
+
+        function User(fistName, lastName, avatar) {
+            this.fistName = fistName;
+            this.lastName = lastName;
+            this.avatar = avatar;
+
+            this.getName = function() {
+                return `${fistName} ${lastName}`
+            }
+        }
+        var author = new User('Truong', 'Nam', 'Avatar');
+        var user = new User('Hoai', 'Nam', 'Avatar');
+
+        author.title = 'Học tập code';
+        user.comment = 'Hơi khó đó nha!';
+
+        console.log(author.getName());
+        console.log(user.getName());
+
