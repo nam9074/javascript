@@ -404,5 +404,177 @@ var c = a < 0 ? a : b;
              * => Treo trình duyệt!!!
              */
 
+        // For Loop
+        var myArray = [
+            'Javasctipr',
+            'PHP',
+            'Ruby',
+            'Python',
+            'Dart'
+        ];
+        var arrayLength = myArray.length;
 
+        for (var i = 0; i < arrayLength; i++) {
+            console.log(myArray[i])
+        }
             
+        // for-in loop
+
+        var myInfo = {
+            name : 'Nam',
+            age : 20
+        }
+        for (var key in myInfo) {
+            console.log(key);
+        }
+
+        var languages = 'Javascript';
+
+        for (var key in laguages) {
+            // console.log(laguages[key]);
+        }
+
+        // for/off loop
+
+        var myArray = [
+            'Javasctipr',
+            'PHP',
+            'Ruby',
+            'Python',
+            'Dart'
+        ];
+        for (var value of myArray) {
+            // console.log(value);
+        }
+
+        var languages = {
+            name : 'Nam',
+            age : 20
+        }
+        // console.log(Object.keys(laguages))          //cách 1
+
+        for (var key in Object.keys(laguages)){        //cách 2
+            // console.log(value)
+        }
+            // console.log(Object.values(laguages))       // cách 3
+        
+        for (var key in Object.values(laguages)){        //cách 2
+                // console.log(value)
+        }
+
+        // white loop
+        var i = 1;
+        while (i < 1000) {
+            i++;
+            // console.log(i);
+        }
+        var myArray = [
+            'Javasctipr',
+            'PHP'
+        ]
+
+        var i = 0;
+        while (i < myArray.length) {
+            // console.log(myArray[i]);
+            i++;
+        }
+
+        // do white
+        var i = 0;
+        do {
+            i++;
+            // console.log(i);
+
+        } while (i < 10);
+
+        var i = 0;
+        var isSucess = false;
+
+        do {
+            i++;
+            console.log('Nạp thẻ lần' + i);
+            // thành công
+            if (false) {
+                isSucess = true;
+            }
+
+        } while (!isSucess && i <= 3);
+
+    //Break & Continue in loop
+
+        for (var i = 0; i < 10; i++){
+        
+            
+            if (i%2 !==0) {
+                continue;
+            }
+            // if (i >= 5) {    // giói hạn 5 chữ số
+            //     break;
+            // }
+            console.log(i);
+        }
+        
+// Vòng lặp giống nhau - Nested loop
+        var myArray = [
+            [1, 2],
+            [3, 4],
+            [5, 6]
+        ];
+        for (var i = 0; i < myArray.length; i++) {
+            for (var j = 0; j < myArray[i].length; j++){
+                // console.log(myArray[i][j]);
+            }
+            
+        }
+
+        // Bài tập : in dãy số thứ thự từ 100 về 1
+        for (var i = 100; i > 0; i--) {
+            // console.log(i);
+        }
+
+        // in ra giá trị +5 lần
+        for (var i = 0; i <= 100; i+= 5) {
+            // console.log(i);
+        }
+// Đệ quy là gì học về đệ quy trong javascript 
+
+var arr = ['a', 'b', 'c', 'd', 'e'];
+    // console.log(new Set(arr));
+
+// Đệ quy..
+/*  Mục tiêu
+        1. Xác định được diểm dừng
+        2. Logic handle => Tạo ra điểm dừng
+*/
+function deQuy(num) {
+    if(num < 0) {
+        // dừng
+        //....
+        return;
+    }
+    deQuy();
+}
+// deQuy();
+
+
+function loop(start, end, cb) {
+    if(start < end) {
+        cb(start);
+        return loop(start + 1, end, cb);
+    }
+}
+var array = ['Javascrip', 'PHP', 'Ruby']; 
+
+loop(0, array.length , function(index) {
+    console.log(array[index]);
+})
+
+// 3 * 2 * 1 = 6
+// 6 * 5 * 4 * ... * 1 = 720
+function giaiThua(number) {
+    if (number > 0) {
+        return number * giaiThua(number -1 )
+    }
+    return 1;
+}
+console.log(giaiThua(6));
