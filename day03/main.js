@@ -350,13 +350,191 @@ Gợi ý:
 // 1. là hàm
 // 2. được truyền qua đối só 
 
+    function myFunction(param){
+        if (typeof param === 'function') {
+        param('Học lập trình');
+        }
+    }
+    function myCallback(value) {
+        console.log('value: ', value);
+    }
+    myFunction(myCallback);
+
+    // Callback 2?
+
+    Array.prototype.map2 = function(callback) {
+        var output = [], arrayLength = this.length;
+        for (var i = 0; i< arrayLength; i++) {
+            var result = callback(this[i], i);
+            output.push(result);
+        }
+        return output;
+        }
+        var courses = [
+            'Javascript',
+            'PHP',
+            'ruby'
+        ];
+        
+        var htmls = courses.map2(function(course) {
+            return `<h2>${course}</h2>`
+        });
+        console.log(htmls);
+
+    /*
+    Ở bài trước chúng ta đã được học cách tạo phương thức map2 hoạt động giống với phương thức map của Array.
+    Bây giờ, các bạn hãy tạo ra phương thức myMap hoạt động tương tự phương thức map2 và map nhé.
+    */
+    // Array.prototype.myMap = function(cb) {
+    //     var result = [], l = this.length;
+    //     for (var i = 0; i < l; i++) {
+    //         result[i] = cb(this[i], i);
+    //     }
+    //     return result;
+    // }
+    // Expected results
+    // const numbers = [1, 2, 3];
+    
+    // console.log(numbers.myMap(function (number) {
+    //     return number * 2;
+    // })) // Output: [2, 4, 6]
+    
+    // console.log(numbers.myMap(function (number, index) {
+    //     return number * index;
+    // })) // Output: [0, 2, 6]
+    
+
+    // Bài tập forEach2, find2, filter2, some2, every2, reduc2 sử dụng callback 
+
+    // foreach2()
+
+        Array.prototype.forEach2 = function(callback) {
+            for (var index in this) {
+                if (this.hasOwnProperty(index)) {
+                    callback(this[index], index, this);
+                }
+            }
+        }
+
+        var courses = new Array(100);
+        courses.push('Javascript', 'Ruby');
+
+        // var courses = [
+        //     'Javascript',
+        //     'PHP',
+        //     'Dart'
+        // ];
 
 
+        courses.forEach2(function(courses, index, array) {
+            // console.log(courses, index, array);
+        });
+      
+        // filetr2()
 
+        Array.prototype.filter2 = function(callback) {
+            var Output = [];
+            for (var index in this) {
+                if (this.hasOwnProperty(index)) {
+                    var result =  callback(this[index], index, this);
+                    if (result) {
+                    Output.push(this[index])
+                    }
+                }
+            }
+            return Output;
+        }
+        var courses = [
+            {
+                name: 'Javascript',
+                coin: 600
+            },
+            {
+                name: 'PHP',
+                coin: 860
+            },
+            {
+                name: 'Ruby',
+                coin: 960
+            }
+        ];
+        var fliterCourses = courses.filter2(function(courses, index, array) {
+            console.log(courses, index, array);
+            return courses.coin > 700; 
+        });
+        console.log(fliterCourses);
       
-      
-      
-      
-      
-      
-      
+        // Some2()
+        Array.prototype.some2 = function(callback) {
+            var Output = false;
+            for (var index in this) {
+                if (this.hasOwnProperty(index)){
+                    if (callback(this[index], index, this)) {
+                        Output =  true;
+                        break;
+                    };
+                }
+            }
+            return Output;
+        }
+
+        var courses = [
+            {
+                name: 'Javascript',
+                coin: 680,
+                isFinish: true
+            },
+            {
+                name: 'PHP',
+                coin: 860,
+                isFinish: false
+            },
+            {
+                name: 'Ruby',
+                coin: 980,
+                isFinish: false
+            }
+        ];
+        
+        var resurlt = courses.some2(function(courses, index) {
+            return courses.isFinish;
+        });
+        console.log(resurlt);
+
+        // every2();
+        Array.prototype.every2 = function(callback) {
+            var Output = true;
+            for (var index in this) {
+                if (this.hasOwnProperty(index)){
+                    var resurlt = callback(this[index], index, this) 
+                        if (!resurlt) {
+                            Output =  false;
+                            break;
+                        };
+                }
+            }
+            return Output;
+        }
+
+        var courses = [
+            {
+                name: 'Javascript',
+                coin: 680,
+                isFinish: true
+            },
+            {
+                name: 'PHP',
+                coin: 860,
+                isFinish: false
+            },
+            {
+                name: 'Ruby',
+                coin: 980,
+                isFinish: false
+            }
+        ];
+        
+        var resurlt = courses.every2(function(courses, index) {
+            return courses.isFinish;
+        });
+        console.log(resurlt);
