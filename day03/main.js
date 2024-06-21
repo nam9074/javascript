@@ -538,3 +538,115 @@ Gợi ý:
             return courses.isFinish;
         });
         console.log(resurlt);
+
+
+/*
+    HTML DOM
+
+    1. Element : ID, Class, tag,CSS selector, HTML collection
+    2. Attribute
+    3. Text
+
+    ___________________
+
+    Javascript : Browser | Sever (NodeJS)
+
+    Browser : HTML -> DOM -> WEB API
+*/
+
+    // get element method
+    console.log(document);          //
+    document.write('Hellow Guys!'); // ghi vào sau phần tử cuối cùng của body
+
+    var headingNode = document.getElementById('heading')    // dạng số ít
+
+    console.log({
+        element: headingNode
+    });
+    var headingNode = document.getElementsByClassName('heading')    // dạng số nhiều
+    console.log(headingNode);
+
+    var headingNode = document.getElementsByTagName('h1')           // dạng số nhiều gọi tên thẻ h1, h2, p,...
+    console.log(headingNode);
+
+    //SCC clector
+    var headingNode = document.querySelector('.heading')            //
+    console.log(headingNode);
+
+        /* Bài tập:
+        productsListElement: thẻ div có class là products-list.
+        firstProductElement: thẻ div đầu tiên có class là product.
+        buttonElements: tất cả các thẻ button.
+        */
+        /**
+         * Sử dụng các biến đã cho sẵn dưới đây
+         
+
+        var productsListElement = document.querySelector('div.products-list')
+
+        var firstProductElement = document.querySelector('div.product')
+
+        var buttonElements = document.getElementsByTagName('button') 
+        */
+    // get element methods -2
+        var boxNode = 
+        document.querySelector('.box-1');
+
+        // công việc 1: sử dụng 'boxNode'
+        console.log(boxNode);
+        // công việc 2: sử dụng tới các li elements là con của '.box-1'
+        console.log(boxNode.getElementsByTagName('li'));
+        console.log(boxNode.querySelector('p')); 
+    // get element methods -3
+        /*
+            1. getElementById                   trả trực tiếp về element (số ít)
+            2. getElementsByClassName           get nhiều element class
+            3. getElementsByTagName             get nhiều element tag (div, h1, p,...)
+            4. querySelector                    trả trực tiếp về element (số ít)
+            5. querySelectorAll                 sử dụng câu truy vấn để trả về tất cả
+
+            6. HTML collection
+            7. document.wite
+        */
+
+    // DOM trribute (thêm sửa xóa)
+        var headingElement = 
+            document.querySelector('h1');
+
+        headingElement.title = 'Title test';
+        headingElement.setAttribute('data', 'test data');
+        
+
+        console.log(headingElement.getAttribute('class'));
+        console.log(headingElement.getAttribute('title'));      // có thể get ra được cả html và js
+        console.log(headingElement.getAttribute('data'));
+        // alert(headingElement.getAttribute('class'));         
+
+    //innerText, textContent
+    //geter 
+    //seter
+        var headingElement = document.querySelector('.heading');
+
+        console.log(headingElement.innerText)           // ko trả về nội dung trong thẻ span, body,..
+        console.log(headingElement.textContent)         // trả về tất cả nội dung bên html
+        // chỉnh sữa trong thẻ
+        headingElement.innerText = 'New heading';       // Toán tử gán
+        headingElement.textContent = 'Neww heading';    //
+    
+    // InnerHTML(ghi đè bên trong), outerHTML(ghi đè bên ngoài) Property 
+    var boxElement = document.querySelector('.box');
+
+    console.log(boxElement);
+
+    boxElement.innerHTML = '<h1 title="Heading">Heading-text</h1>';
+    console.log(boxElement.innerHTML);                  //lấy element ở trong html ra
+    
+    // console.log(boxElement.querySelector('h1').innerText)
+
+    boxElement.outerHTML = '<span>Test</span>';
+    console.log(boxElement.outerHTML);
+
+
+
+        
+
