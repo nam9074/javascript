@@ -540,7 +540,7 @@ Gợi ý:
         console.log(resurlt);
 
 
-/*
+    /*
     HTML DOM
 
     1. Element : ID, Class, tag,CSS selector, HTML collection
@@ -552,7 +552,7 @@ Gợi ý:
     Javascript : Browser | Sever (NodeJS)
 
     Browser : HTML -> DOM -> WEB API
-*/
+    */
 
     // get element method
     console.log(document);          //
@@ -646,7 +646,260 @@ Gợi ý:
     boxElement.outerHTML = '<span>Test</span>';
     console.log(boxElement.outerHTML);
 
+// DOM CSS
+
+    var boxElement = document.querySelector('.box-3');
+    // cách 1:
+        // boxElement.style.width = '100px';
+        // boxElement.style.height = '100px';
+        // boxElement.style.background = 'red';
+    // cách 2:
+    Object.assign(boxElement.style, {
+        width: '200px',
+        height: '100px',
+        backgroundColor: 'green',
+    });
+    console.log(boxElement.style.width);        // lấy ra thuộc tính css
 
 
+    /*
+    ClassList property
+
+    add             // thêm 1 class
+    contains        // là 1 hàm, nhận đối số là class và kt xem trong mảng có tồn tại ko.
+    remove          // xóa class trong
+    toggle          // kiểm tra element có class cần tìm ko, có thì gỡ bỏ, nếu ko có thì thêm vào
+    */
+
+    var boxElement = document.querySelector('.box');
+    // console.log(boxElement.classList.length);       // kiểm tra element có số lượn class
+    // console.log(boxElement.classList.value);        // trả về chuỗi nằm trong class
+
+    boxElement.classList.add('red');
+    console.log(boxElement.classList.contains('red'));
+    // boxElement.classList.remove('red');
+    // setTimeout(() => {
+    //     boxElement.classList.remove('red');
+    // }, 3000);
+
+    setInterval(() => {
+        boxElement.classList.toggle('red');
+    }, 1000);
+
+    /*DOM events        sự kiện được in ra trong người dùng tương tác
+        1. Attribute events
+        2. Asign event using the element node
+    */
+    var h1Element = document.querySelectorAll('h2');
+
+    for (var i = 0; i < h1Element.length; ++i) {
+        h1Element[i].onclick = function(e) {
+            console.log(e.target);
+        }
+     }
+
+     // DOM events
+     // 1. Imput / Select
+     // 2. Key up / down
+
+     var imputElement = document.querySelector('input[type="text"]');
+
+     imputElement.onchange = function(e) {
+        console.log(e.target.value);
+     };
+
+     var imputElement = document.querySelector('input[type="checkbox"]');
+
+     imputElement.onchange = function(e) {
+        console.log(e.target.checkbox);
+     };
+
+     var imputElement = document.querySelector('select');
+
+     imputElement.onchange = function(e) {
+        console.log(e.target.value);
+     };
+
+     // 2.
+     var imputElement = document.querySelector('input[type="text"]');
+
+     imputElement.onkeyup = function(e) {
+        console.log(e);
+     };
+
+     /*
+     DOM events
+     1. preventDefault
+     2. stopPropagation
+     */
+    var aElement = document.links;
+
+    for(var i = 0; i < aElement.length; ++i) {
+        aElement[i].onclick = function(e) {
+            console.log(e.target.href);
+        }
+    }
+
+    //1. preventDefault         ngăn chặn mọi hành vi mặc định xảy ra trong trang 
+    var ulElement = document.querySelector('ul');
+
+    ulElement.onmousedown = function(e) {
+        e.preventDefault();
+    }
+    ulElement.onclick = function(e) {
+        console.log(e.target);
+    }
+
+    // 2. stopPropagation
+    document.querySelector('div').onclick = 
+    function() {
+        console.log('DIV')
+    }
+
+    document.querySelector('button').onclick = 
+    function(e) {
+        e.stopPropagation();
+        console.log('click me!')
+    }
+
+    /*
+    1. Event Listener
+    2. JSON
+     . Promise
+    3. Fetch
+    4. DOM location
+    5. Local storage
+    6. Session storage
+    7. Coding convention
+    8. Best Practices
+    9. Mistakes
+    10. Performance
+
+        1. xử lý nhiều việc khi 1 event xảy ra
+        2. Lắng nghe/ hủy bỏ lắng nghe
+    */
+   var btn = document.getElementById('btn');
+    
+   function viec1() {
+    console.log('viec 1');
+   }
+   function viec2() {
+    console.log('viec 2');
+   }
+   btn.addEventListener('click', viec1);
+   btn.addEventListener('click', viec2);
+
+   setTimeout(function() {
+    btn.removeEventListener('click', viec1);
+   }, 3000);
+/* JSON  
+    1. Là 1 định dạng dữ liệu (chuỗi)
+    2. JavaScript Object Notation
+    3. JSON: Number, Boolean, String, Null, Aray, Object
+
+        Mã hóa / Giãi mã
+        Encode / Decode
+        Stringify / Parse
+*/
+   // Stringify: Từ JavaScript types -> JSON
+   // Parse: từ JSON -> JavaScript types
+
+    // var json = '["JavaScript", "PHP"]';
+
+    console.log(JSON.stringify([        // String
+        'JavaScript',
+        'PHP'
+    ]));
+
+    console.log(JSON.stringify({        //Object
+        name: 'Truong Nam',
+        age: 20
+    }));
+
+    /*3. Promise
+        - Sync
+        - Async
+        - Nỗi đau
+        - Lý thuyết, cách hoạt động
+        - thực hành, ví dụ 
+    */
+    // Sync / Async
+
+    //Callback
+
+    //Sleep
+    setTimeout(function() {
+        console.log(1);
+    }, 1000);
+    console.log(2);
+
+    //3. Promise (pain) nỗi đau
+        // Callback hell
+        //pyramid of doom
+
+        setTimeout(function() {
+            console.log(1) // Việc 1
+            setTimeout(function() {
+                console.log(2) // Việc 2
+                setTimeout(function() {
+                    console.log(3) // Việc 3
+                    setTimeout(function() {
+                        console.log(4) // Việc 4
+                        setTimeout(function() {
+                            console.log(5) // Việc 5
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }, 1000);
+
+        //Promise (concept) Lý thuyết cách họat động
+        // 1. new Promise
+        // 2. Executor
+
+        /*
+        1. Pendding
+        2. Fulfilled
+        3. Rejected
+        */
+
+        var promise = new Promise (
+            // Executor
+            function(resolve, reject) {
+                // Logic
+                // thành công: resolve();
+                // thất bại: reject();
+                //Fake call API
+
+                resolve([
+                    {
+                     id: 1,
+                     name: 'JavaScript',
+                    }
+                ]);
+            }
+        );
+
+        promise
+            .then(function(course) {
+                console.log(course);
+            });
+            // .catch(function() {
+            //     console.log('Failure!');
+            // });
+            // .finally(function() {
+            //     console.log('Done!');
+            // });
+
+            /* Câu hỏi lý thuyết phóng vấn thường gặp
+                khái niệm Promise:
+                    nó sinh ra để sử lý quy tắc bất đồng bộ, trước khi có promise thì thường sử dụng Callback 
+                    callback nó sẽ xảy ra 1 lỗi đó là callback hell, code sẽ bị dời dạc khó nhìn và khó hiểu
+                    thế nên promise được sinh ra ở phiên bản mới hơn và chúng ta có thể sử dụng nó để khác phục tình trạng callback hell giúp viết code dế hiểu hơn
+
+                để tạo ra promise: 
+                    sử dụng từ khóa new Promise và trong đó chúng ta truyền vào 1 Executor function( trong đó nhận dc 2 tham số thành công: resolve()  thất bại: reject()
+                        và khi sử dụng promise sẽ tạo ra và sử dụng phương thức (.then) được nhận callback khi chúng ta được resolve và (.catch) khi chung ta được reject
+                */
         
 
