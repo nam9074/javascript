@@ -817,89 +817,291 @@ Gợi ý:
     }));
 
     /*3. Promise
-        - Sync
-        - Async
-        - Nỗi đau
-        - Lý thuyết, cách hoạt động
-        - thực hành, ví dụ 
-    */
-    // Sync / Async
+            - Sync
+            - Async
+            - Nỗi đau
+            - Lý thuyết, cách hoạt động
+            - thực hành, ví dụ 
+        */
+        // Sync / Async
 
-    //Callback
+        //Callback
 
-    //Sleep
-    setTimeout(function() {
-        console.log(1);
-    }, 1000);
-    console.log(2);
-
-    //3. Promise (pain) nỗi đau
-        // Callback hell
-        //pyramid of doom
-
+        //Sleep
         setTimeout(function() {
-            console.log(1) // Việc 1
+            console.log(1);
+        }, 1000);
+        console.log(2);
+
+        //3. Promise (pain) nỗi đau
+            // Callback hell
+            //pyramid of doom
+
             setTimeout(function() {
-                console.log(2) // Việc 2
+                console.log(1) // Việc 1
                 setTimeout(function() {
-                    console.log(3) // Việc 3
+                    console.log(2) // Việc 2
                     setTimeout(function() {
-                        console.log(4) // Việc 4
+                        console.log(3) // Việc 3
                         setTimeout(function() {
-                            console.log(5) // Việc 5
+                            console.log(4) // Việc 4
+                            setTimeout(function() {
+                                console.log(5) // Việc 5
+                            }, 1000);
                         }, 1000);
                     }, 1000);
                 }, 1000);
             }, 1000);
-        }, 1000);
 
-        //Promise (concept) Lý thuyết cách họat động
-        // 1. new Promise
-        // 2. Executor
+            //Promise (concept) Lý thuyết cách họat động
+            // 1. new Promise
+            // 2. Executor
 
-        /*
-        1. Pendding
-        2. Fulfilled
-        3. Rejected
-        */
+            /* có 3 trạng thái
+            1. Pendding
+            2. Fulfilled
+            3. Rejected
+            */
 
-        var promise = new Promise (
-            // Executor
-            function(resolve, reject) {
-                // Logic
-                // thành công: resolve();
-                // thất bại: reject();
-                //Fake call API
+            var promise = new Promise (
+                // Executor
+                function(resolve, reject) {
+                    // Logic
+                    // thành công: resolve();
+                    // thất bại: reject();
+                    //Fake call API
 
-                resolve([
-                    {
-                     id: 1,
-                     name: 'JavaScript',
-                    }
-                ]);
+                    resolve([
+                        {
+                        id: 1,
+                        name: 'JavaScript',
+                        }
+                    ]);
+                }
+            );
+
+            promise
+                .then(function(course) {
+                    console.log(course);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                })
+                .finally(function() {
+                    console.log('Done!');
+                });
+
+                /* Câu hỏi lý thuyết phóng vấn thường gặp
+                    khái niệm Promise:
+                        nó sinh ra để sử lý quy tắc bất đồng bộ, trước khi có promise thì thường sử dụng Callback 
+                        callback nó sẽ xảy ra 1 lỗi đó là callback hell, code sẽ bị dời dạc khó nhìn và khó hiểu
+                        thế nên promise được sinh ra ở phiên bản mới hơn và chúng ta có thể sử dụng nó để khác phục tình trạng callback hell giúp viết code dế hiểu hơn
+
+                    để tạo ra promise: 
+                        sử dụng từ khóa new Promise và trong đó chúng ta truyền vào 1 Executor function( trong đó nhận dc 2 tham số thành công: resolve()  thất bại: reject()
+                            và khi sử dụng promise sẽ tạo ra và sử dụng phương thức (.then) được nhận callback khi chúng ta được resolve và (.catch) khi chung ta được reject
+                    */
+            // Promies (chain)
+            var promise = new Promise (
+                // Executor
+                function(resolve, reject) {
+                    // Logic
+                    // thành công: resolve();
+                    // thất bại: reject();
+                    //Fake call API
+
+                    resolve();
+                }
+            );
+
+            promise
+                .then(function() {
+                    return new Promise(function(resolve) {
+                        setTimeout(function() {
+                            resolve([1,2,3]);
+                        }, 3000);
+                    });
+                })
+                .then(function(data) {
+                    console.log(data);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                })
+                .finally(function() {
+                    console.log('Done!');
+                });
+
+            function sleep(ms) {
+                return new Promise(function(resolve) {
+                    setTimeout(resolve, ms);
+                });
             }
-        );
+            sleep(1000)
+                .then(function() {
+                    console.log(1);
+                    return sleep(1000);
+                })
+                .then(function() {
+                    console.log(2);
+                    return new Promise(function(resolve, reject) {
+                        reject('Có lỗi!');
+                    });
+                })
+                .then(function() {
+                    console.log(3);
+                    return sleep(1000);
+                })
+                .then(function() {
+                    console.log(4);
+                    return sleep(1000); 
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
 
-        promise
-            .then(function(course) {
-                console.log(course);
+            // Promies
+            // 1. Promies.resolve
+            // 2. Promies.reject
+            // 3. Promies.all
+
+            // Thư viện: Output luôn luôn là mổt Promies
+
+            // 1.
+            var promies = Promise.resolve('Success!');
+            // 2.
+            var promies = Promise.reject('Error!');
+            promies 
+                .then(function (result) {
+                    console.log('result: ', result);
+                })
+                .catch(function (err) {
+                    console.log('err: ', err);
+                }); 
+
+            // 3. 
+            var promise1 = new Promise(function (resolve) {
+                setTimeout(function() {
+                    resolve([1]);
+                }, 2000);
             });
-            // .catch(function() {
-            //     console.log('Failure!');
-            // });
-            // .finally(function() {
-            //     console.log('Done!');
-            // });
+            var promise2 = new Promise(function (resolve) {
+                setTimeout(function() {
+                    resolve([2, 3]);
+                }, 5000);
+            });
 
-            /* Câu hỏi lý thuyết phóng vấn thường gặp
-                khái niệm Promise:
-                    nó sinh ra để sử lý quy tắc bất đồng bộ, trước khi có promise thì thường sử dụng Callback 
-                    callback nó sẽ xảy ra 1 lỗi đó là callback hell, code sẽ bị dời dạc khó nhìn và khó hiểu
-                    thế nên promise được sinh ra ở phiên bản mới hơn và chúng ta có thể sử dụng nó để khác phục tình trạng callback hell giúp viết code dế hiểu hơn
+            Promise.all([promise1, promise2])
+                .then(function(result) {
+                    var result1 = result[0];
+                    var result2 = result[1];
 
-                để tạo ra promise: 
-                    sử dụng từ khóa new Promise và trong đó chúng ta truyền vào 1 Executor function( trong đó nhận dc 2 tham số thành công: resolve()  thất bại: reject()
-                        và khi sử dụng promise sẽ tạo ra và sử dụng phương thức (.then) được nhận callback khi chúng ta được resolve và (.catch) khi chung ta được reject
-                */
-        
+                    console.log(result1.concat(result2))
+                });
+    // Fetch
+
+    var postApi = 'https://jsonplaceholder.typicode.com/posts';
+
+    // Strem
+    fetch(postApi)
+        .then(function(response) {
+            return response.json();
+            //  JSON.pares: JSON -> JavaScript types 
+        })
+        .then(function(posts) {
+            var htmls = posts.map(function(post) {
+                return `<li>
+                    <h2>${post.title}</h2>
+                    <p>${post.body}</p>
+                </li>`;
+            });
+            var html = htmls.join('');document.getElementById('post-lock').innerHTML = html;
+
+        })
+        .catch(function(err) {
+            alert('Có lỗi!')
+        });
+        /*4. Fetch
+              - JSON server: API server (fake) / Mock API
+              - CRUD 
+                    - Create: Tạo mới -> POST
+                    - Read: Lấy dữ liệu -> GET
+                    - Update: Chỉnh sửa -> PUT / PATCH
+                    - Delete: Xóa / DELETE
+              - Postman
+        */
+       var listCoursesBlock = document.querySelector('#list-courses');
+
+       var courseApi = '';
+
+       function start() {
+            getCourses(renderCouses);
+            handleCreateForm();
+       }
+       start();
+
+       //Functions
+       function getCourses(callback) {
+        fetch(courseApi)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(callback);
+       }
+       function hendDeleteCourse(id) {
+        var options = {
+            method: 'POST',
+            body: JSON.stringify(data)
+        }
+        fetch(courseApi + '/' + id, options)
+        .then(function(response) {
+            response.json();
+        })
+        .then(function() {
+
+        });
+       };
+
+       function renderCouses(courses) {
+        var listCourses = document.querySelector('#list-courses');
+        var htmls = courses.map(function(course) {
+            return `
+            <li>
+            <h4>${courses.name}</h4>
+            <p>${courses.description}</p>
+            <button onclick="deleteCourse(${course.id})">Xóa</button>
+            </li>
+            `;
+        });
+       }
+
+       function createCourse(data, callback) {
+        var options = {
+            method: 'POST',
+            body: JSON.stringify(data)
+        }
+        fetch(courseApi, options)
+        .then(function(response) {
+            response.json();
+        })
+        .then(callback);
+    }
+
+       function handleCreateForm() {
+        var createBtn = document.querySelector('#create');
+        createBtn.onclick = function() {
+             var name = document.querySelector('input[name="name"]').value;
+             var description = document.querySelector('input[name="description"]').value;
+
+             var formData = {
+                name: name,
+                description: description
+             };
+             createCourse(formData, function() {
+                getCourses(renderCouses);
+             });
+        }
+       }
+                
+
 
